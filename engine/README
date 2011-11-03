@@ -1,0 +1,14 @@
+The OSGi engine is an embedded OSGi framwork.
+It provides a shell (very basic), with all commands found in the initial bundles directory.
+Basically all the bundles found in this directory are loaded in the OSGi framework at engine startup, but those
+registering a service implementing the ShellCommannd interface are added to the engine shell commands.
+
+NB :
+- The ShellCommand interface is defined in the engine (not an OSGi application). It's exposed to OSGi bundles via the systempackages_extra option
+  of the equinox OSGi startup configuration. This allows bundles to import this package, as if it was exported by another bundle or the framework
+  itself (like java.*). The line used to expose the interface is this one :
+    configuration.put(Constants.FRAMEWORK_SYSTEMPACKAGES_EXTRA, "org.phoenix.osgi.engine.interfaces; version=1.0.0");
+- The engine uses a Shell class, which looks like a bundle activator, because of its start(BundleContext) method. In fact, it's a normal POJO, and its start method
+  is called with the framework's bundleContext (yes, the framework itself IS a bundle (with bundle ID 0)). The Shell class uses the bundleContext
+  to create a ServiceTracker. This service tracker listens to the service registry for ShellCommand interface implementations, allowing the Shell to be
+  dynamically extended whenever a new command bundle is installed and activated.

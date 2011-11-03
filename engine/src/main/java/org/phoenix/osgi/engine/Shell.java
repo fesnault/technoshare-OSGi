@@ -56,12 +56,14 @@ public class Shell {
 	
 	public void executeCommand(String command, String...args) {
 		Object[] shellCommands = shellCommandTracker.getServices();
-		for (Object object : shellCommands) {
-			if (object != null) {
-				ShellCommand shellCommand = (ShellCommand)object;
-				if (shellCommand.canHandleCommand(command)) {
-					shellCommand.execute(command, args);
-					return;
+		if (shellCommands != null) { 
+			for (Object object : shellCommands) {
+				if (object != null) {
+					ShellCommand shellCommand = (ShellCommand)object;
+					if (shellCommand.canHandleCommand(command)) {
+						shellCommand.execute(command, args);
+						return;
+					}
 				}
 			}
 		}
