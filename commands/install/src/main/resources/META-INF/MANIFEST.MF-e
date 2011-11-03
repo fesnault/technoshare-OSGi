@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-Version: 1.0.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.phoenix.osgi.engine.commands.install
-Bundle-Name: Phoenix OSGi engine install command
-Bundle-Activator: org.phoenix.osgi.engine.commands.install.Activator
-Import-Package: org.osgi.framework; version="1.6.0", org.phoenix.osgi.engine.ShellCommand; version="1.0.0"
-Bundle-Vendor: Phoenix
