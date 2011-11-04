@@ -3,6 +3,10 @@ It provides a shell (very basic), with all commands found in the initial bundles
 Basically all the bundles found in this directory are loaded in the OSGi framework at engine startup, but those
 registering a service implementing the ShellCommannd interface are added to the engine shell commands.
 
+To run the engine, you must ensure the osgi jar is in the classpath directory, make sur the start.sh script targets the right classpath directory,
+and provide (or not) any initial bundles you may want to load at startup in the initialBundles directory (and make sure the start.sh script references
+it correctly).
+
 NB :
 - The ShellCommand interface is defined in the engine (not an OSGi application). It's exposed to OSGi bundles via the systempackages_extra option
   of the equinox OSGi startup configuration. This allows bundles to import this package, as if it was exported by another bundle or the framework
@@ -12,3 +16,4 @@ NB :
   is called with the framework's bundleContext (yes, the framework itself IS a bundle (with bundle ID 0)). The Shell class uses the bundleContext
   to create a ServiceTracker. This service tracker listens to the service registry for ShellCommand interface implementations, allowing the Shell to be
   dynamically extended whenever a new command bundle is installed and activated.
+
