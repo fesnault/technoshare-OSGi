@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-Version: 1.0.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.phoenix.osgi.bundles.uses-demo-b
+Bundle-Name: Uses Demo B
+Bundle-Provider: Phoenix
+Export-Package: org.phoenix.osgi.bundles.uses.bar;version="1.0.0"
+Import-Package: org.osgi.framework; version="[1.5.0,2.0.0)", org.phoenix.osgi.bundles.uses.foo;version="[1.0.0,2.0.0)"
+Bundle-Vendor: Phoenix
+Comment-ToKeep: uses:="org.phoenix.osgi.bundles.uses.foo"

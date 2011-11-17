@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.poenix.osgi.bundles</groupId>
-	<artifactId>basic-import</artifactId>
+	<artifactId>uses-demo-C</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>basic import bundle</name>
+	<name>uses-demo-c</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.osgi</groupId>
@@ -14,11 +14,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.poenix.osgi.bundles</groupId>
-			<artifactId>basic-export</artifactId>
+        		<artifactId>uses-demo-B</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+                        <groupId>org.poenix.osgi.bundles</groupId>
+                        <artifactId>uses-demo-D</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                        <scope>provided</scope>
+                </dependency>
 	</dependencies>
 	<build>
     <plugins>
