@@ -4,9 +4,9 @@ import java.util.Dictionary;
 
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
-import org.phoenix.osgi.bundles.managed.LogService;
+import org.phoenix.osgi.bundles.managed.ManagedLogService;
 
-public class LogServiceImpl implements LogService, ManagedService {
+public class ManagedLogServiceImpl implements ManagedLogService, ManagedService {
 	private String valueToPrint="Default";
 
 	@Override

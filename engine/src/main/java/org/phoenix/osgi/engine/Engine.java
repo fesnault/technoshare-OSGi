@@ -43,6 +43,7 @@ public class Engine
         Hashtable<String, String> configuration = new Hashtable<String, String>();
         configuration.put("eclipse.consoleLog","true");
         configuration.put("osgi.console","6666");
+        configuration.put("osgi.configuration.area", "./configuration");
         configuration.put(Constants.FRAMEWORK_STORAGE_CLEAN, Constants.FRAMEWORK_STORAGE_CLEAN_ONFIRSTINIT);
         configuration.put(Constants.FRAMEWORK_SYSTEMPACKAGES_EXTRA, "org.phoenix.osgi.engine.interfaces; version=1.0.0");
         framework = factory.newFramework(configuration);

@@ -1,0 +1,27 @@
+<!-- $Id: assembly.xml 104311 2011-10-26 16:15:25Z esnault $ -->
+<assembly>
+    <formats>
+       <format>dir</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+       <fileSet>
+           <directory>target</directory>
+           <outputDirectory/>
+           <includes>
+               <include>org.eclipse.osgi.*.jar</include>
+               <include>org.apache.felix.fileinstall*.jar</include>
+           </includes>
+           <excludes>
+                <exclude>engine*.jar</exclude>
+           </excludes>
+       </fileSet>
+    </fileSets>
+    <dependencySets>
+       <dependencySet>
+           <scope>runtime</scope>
+           <outputDirectory/>
+           <useProjectArtifact>false</useProjectArtifact>
+       </dependencySet>
+    </dependencySets>
+</assembly>

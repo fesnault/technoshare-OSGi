@@ -1,5 +1,5 @@
 package org.phoenix.osgi.bundles.managed;
 
-public interface LogService {
+public interface ManagedLogService {
 	void logIt();
 }
