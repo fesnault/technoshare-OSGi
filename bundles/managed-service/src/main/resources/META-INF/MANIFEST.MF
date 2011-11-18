@@ -4,6 +4,7 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.phoenix.osgi.bundles.managed-service
 Bundle-Name: Managed Service Providing Bundle
 Bundle-Provider: Phoenix
-Bundle-Activator: org.phoenix.osgi.bundles.basicexport.Activator
+Bundle-Activator: org.phoenix.osgi.bundles.managed.activator.Activator
 Import-Package: org.osgi.framework; version="[1.5.0,2.0.0)", org.osgi.service.cm; version="[1.2.0, 2.0.0)"
+Export-Package: org.phoenix.osgi.bundles.managed; version="1.0.0"
 Bundle-Vendor: Phoenix

@@ -40,11 +40,32 @@ public class Shell {
 		} else {
 			StringTokenizer tokenizer = new StringTokenizer(commandLine);
 			if (tokenizer.hasMoreTokens()) {
-				String command = tokenizer.nextToken();
+                String command = tokenizer.nextToken();
 				List<String> args = new ArrayList<String>();
+				boolean inQuotedParam = false;
+				StringBuilder builder = null;
 				if (tokenizer.hasMoreTokens()) {
 					while (tokenizer.hasMoreTokens()) {
-						args.add(tokenizer.nextToken());
+					    String token = tokenizer.nextToken();
+					    if (token.contains("\"") && !inQuotedParam) {
+					        inQuotedParam=true;
+					        token = token.replaceFirst("\"", "");
+					        builder = new StringBuilder();
+					        builder.append(token);
+					    } else if (inQuotedParam) {
+					        if (token.contains("\"")) {
+					            inQuotedParam = false;
+					            token = token.replaceFirst("\"", "");
+					            builder.append(" ");
+					            builder.append(token);
+					            args.add(builder.toString());
+					        } else {
+					            builder.append(" ");
+					            builder.append(token);
+					        }
+					    } else {
+					        args.add(token);
+					    }
 					}
 				}
 				executeCommand(command, args.toArray(new String[args.size()]));

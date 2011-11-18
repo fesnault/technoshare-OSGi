@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.cm.ManagedService;
 import org.phoenix.osgi.bundles.managed.ManagedLogService;
 import org.phoenix.osgi.bundles.managed.impl.ManagedLogServiceImpl;
 
@@ -18,7 +19,8 @@ public class Activator implements BundleActivator {
         ManagedLogService service = new ManagedLogServiceImpl();
         Dictionary<Object, Object> props = new Properties();
         props.put("service.pid", PID);
-        serviceRegistration = bundleContext.registerService(ManagedLogService.class.getName(), service, props);
+        String[] interfaces=new String[] {ManagedLogService.class.getName(), ManagedService.class.getName()};
+        serviceRegistration = bundleContext.registerService(interfaces, service, props);
         System.out.println("Registered a managed log service under the pid : "+PID);
     }
 

@@ -11,6 +11,7 @@
            <includes>
                <include>org.eclipse.osgi.*.jar</include>
                <include>org.apache.felix.fileinstall*.jar</include>
+               <include>cm*.jar</include>
            </includes>
            <excludes>
                 <exclude>engine*.jar</exclude>
