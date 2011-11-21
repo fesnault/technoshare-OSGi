@@ -9,9 +9,11 @@ public class Activator implements BundleActivator{
 	public void start(BundleContext context) throws Exception {
 		try {
 		ConfigCommand configCommand = new ConfigCommand(context);
+		FactoryConfigCommand fconfigCommand = new FactoryConfigCommand(context);
 		ListConfigsCommand listConfigCommand = new ListConfigsCommand(context);
 		context.registerService(ShellCommand.class.getName(), configCommand, null);
         context.registerService(ShellCommand.class.getName(), listConfigCommand, null);
+        context.registerService(ShellCommand.class.getName(), fconfigCommand, null);
 		System.out.println("Config command bundle started.");
 		} catch (Exception e) {
 			System.out.println("Error : "+e.getMessage());
