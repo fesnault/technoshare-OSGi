@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaData xmlns="http://www.osgi.org/xmlns/metatype/v1.0.0">
+    <OCD name="ConfigurableEchoService" id="configurable-echo-service-ocd" description="EchoService Configuration Metadata">
+        <AD name="Echoed value" id="discriminator" type="String" default="default-value"
+            description="The value echoed by the echo service." />
+        <AD name="Dummy property" id="dummy" type="String" default="dummy"
+            description="Whatever." />
+    </OCD>
+    <Designate pid="my.service.factory">
+        <Object ocdref="configurable-echo-service-ocd" />
+    </Designate>
+</MetaData>

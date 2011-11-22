@@ -20,6 +20,11 @@
             <artifactId>cm</artifactId>
             <version>3.2.0-v20070116</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.equinox</groupId>
+            <artifactId>metatype</artifactId>
+            <version>1.0.0-v20070226</version>
+        </dependency>
 	<dependency>
         	<groupId>org.eclipse.osgi</groupId>
     		<artifactId>org.eclipse.osgi.services</artifactId>
