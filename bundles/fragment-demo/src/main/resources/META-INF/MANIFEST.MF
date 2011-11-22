@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-Version: 1.0.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.phoenix.osgi.bundles.fragmentdemo
+Bundle-Name: Framework package export extending fragment demo
+Bundle-Provider: Phoenix
+Export-Package: org.phoenix.osgi.bundles.logger; version="1.0.0"
+Fragment-Host: org.phoenix.osgi.bundles.fragmentdemouser; bundle-version="1.0.0"
+Bundle-Vendor: Phoenix

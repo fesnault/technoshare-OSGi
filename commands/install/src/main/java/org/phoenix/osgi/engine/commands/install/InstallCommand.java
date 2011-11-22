@@ -26,7 +26,7 @@ public class InstallCommand implements ShellCommand {
 	@Override
 	public void execute(String command, String...args) {
 		if (args.length < 2) {
-			System.out.println("Usage: install <relative path|absolute path> <bundle jar name> [-list]");
+			System.out.println("Usage: install <relative path|absolute path> <bundle jar name> [-list|-start]");
 			return;
 		}
 		String directory=args[0];
@@ -42,7 +42,11 @@ public class InstallCommand implements ShellCommand {
 			for (String path : jarPathes) {
 				System.out.println(" -> "+path);
 			}
-		} else {
+		} if (modifier != null && modifier.trim().toLowerCase().equals("-start")) {
+		    for (String path : jarPathes) {
+                installBundle(path, true);
+            }
+		}else {
 			for (String path : jarPathes) {
 				installBundle(path);
 			}
@@ -50,11 +54,18 @@ public class InstallCommand implements ShellCommand {
 	}
 	
 	private void installBundle(String path) {
+	    installBundle(path, false);
+	}
+	
+	private void installBundle(String path, boolean start) {
 		try {
 			Bundle bundle=context.installBundle("file://"+path);
-			System.out.println("Bundle "+bundle.getSymbolicName()+" ("+bundle.getVersion()+") installed.");
+			if (start) {
+			    bundle.start();
+			}
+		    System.out.println("Bundle "+bundle.getSymbolicName()+" ("+bundle.getVersion()+") installed" + (start?" and started.":"."));
 		} catch (BundleException e) {
-			System.out.println("Could not install bundle with path :"+path);
+			System.out.println("Could not install and/or start bundle with path :"+path);
 			System.out.println("Error message : "+e.getMessage());
 			e.printStackTrace();
 		}
