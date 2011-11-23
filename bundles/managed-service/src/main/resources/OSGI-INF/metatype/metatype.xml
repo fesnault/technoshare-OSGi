@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaData xmlns="http://www.osgi.org/xmlns/metatype/v1.0.0">
+    <OCD name="ManagedLogService" id="log-service-ocd" description="LogService Configuration Metadata">
+        <AD name="Echoed value" id="value.to.print" type="String" default="default-value"
+            description="The value echoed by the log service." />
+    </OCD>
+    <Designate pid="dummy.logging.service">
+        <Object ocdref="log-service-ocd" />
+    </Designate>
+</MetaData>

@@ -5,6 +5,9 @@ Bundle-SymbolicName: org.phoenix.osgi.bundles.uses-demo-b
 Bundle-Name: Uses Demo B
 Bundle-Provider: Phoenix
 Export-Package: org.phoenix.osgi.bundles.uses.bar;version="1.0.0"
+#
+# Exchange the export packages header to declare the uses constraint
+#Export-Package: org.phoenix.osgi.bundles.uses.bar;version="1.0.0"; uses:="org.phoenix.osgi.bundles.uses.foo"
+#
 Import-Package: org.osgi.framework; version="[1.5.0,2.0.0)", org.phoenix.osgi.bundles.uses.foo;version="[1.0.0,2.0.0)"
 Bundle-Vendor: Phoenix
-Comment-ToKeep: uses:="org.phoenix.osgi.bundles.uses.foo"
