@@ -3,6 +3,7 @@ package org.phoenix.osgi.engine;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -111,13 +112,18 @@ public class Shell {
 	    try {
     	    ServiceTracker pocCommandTracker = new ServiceTracker(osgiContext, FrameworkUtil.createFilter("(&("+Constants.OBJECTCLASS+"="+PocInterface.class.getName()+")(site="+args[0]+"))"), null);
             pocCommandTracker.open();
-            Object pocCommand = pocCommandTracker.getService();
-            if (pocCommand != null) { 
-                PocInterface pocService = (PocInterface)pocCommand;
-                pocService.doIt();
+            ServiceReference reference = pocCommandTracker.getServiceReference();
+            if (reference != null) {
+                Enumeration entries = reference.getBundle().findEntries("/", "*.class", true);
+                Object pocCommand = osgiContext.getService(reference);
+                if (pocCommand != null) { 
+                    PocInterface pocService = (PocInterface)pocCommand;
+                    pocService.doIt(entries);
+                }
+            } else {
+                System.out.println("Could not find a poc command handler able to execute command : "+command);                
             }
             pocCommandTracker.close();
-            System.out.println("Could not find a poc command handler able to execute command : "+command);
 	    } catch (Exception e) {
 	        System.out.println("Error while processing poc command : "+e.getMessage());
 	        e.printStackTrace();

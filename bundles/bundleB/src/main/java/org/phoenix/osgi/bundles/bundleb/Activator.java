@@ -15,7 +15,6 @@ public class Activator implements BundleActivator {
     @SuppressWarnings("unchecked")
     public void start(BundleContext bundleContext) throws Exception {
         BundleBPocImpl pocImpl = new BundleBPocImpl();
-        pocImpl.setBundleContext(bundleContext);
         Dictionary properties = new Properties();
         properties.put("site", "b");
         serviceRegistration = bundleContext.registerService(PocInterface.class.getName(), pocImpl, properties);
