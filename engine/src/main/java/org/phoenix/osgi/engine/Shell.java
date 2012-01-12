@@ -7,16 +7,21 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
+import org.phoenix.osgi.engine.interfaces.PocInterface;
 import org.phoenix.osgi.engine.interfaces.ShellCommand;
 
 public class Shell {
 	private ServiceTracker shellCommandTracker;
 	private List<ServiceReference> shellCommandReferences = new ArrayList<ServiceReference>();
+	private BundleContext osgiContext;
 	
 	public void start(BundleContext context)  throws Exception {
 		System.out.println("Phoenix OSGi shell.");
+		osgiContext = context;
 		shellCommandTracker = new ServiceTracker(context, ShellCommand.class.getName(), null);
 		shellCommandTracker.open();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -31,6 +36,7 @@ public class Shell {
 	}
 	
 	public void stop() {
+	    osgiContext = null;
 		shellCommandTracker.close();
 	}
 	
@@ -68,7 +74,11 @@ public class Shell {
 					    }
 					}
 				}
-				executeCommand(command, args.toArray(new String[args.size()]));
+				if (command.equals("poc")) {
+				    executePocCommand(command, args.toArray(new String[args.size()]));
+				} else {
+				    executeCommand(command, args.toArray(new String[args.size()]));
+				}
 			} else {
 				System.out.println("Command line is empty, cannot handle command.");
 			}
@@ -90,4 +100,27 @@ public class Shell {
 		}
 		System.out.println("Could not find a command handler able to execute command : "+command);
 	}
+	
+	public void executePocCommand(String command, String...args) {
+	    if (args == null || args.length == 0) {
+	        System.out.println("Please provide a site to call poc interface implementation on.");
+	        return;
+	    }
+	    // (&(objectClass=org.acme.Printer)(paper-size=A3))
+	    //ServiceTracker pocCommandTracker = new ServiceTracker(osgiContext, "(&(objectclass=org.acme.Printer)(paper-size=A3))", null);
+	    try {
+    	    ServiceTracker pocCommandTracker = new ServiceTracker(osgiContext, FrameworkUtil.createFilter("(&("+Constants.OBJECTCLASS+"="+PocInterface.class.getName()+")(site="+args[0]+"))"), null);
+            pocCommandTracker.open();
+            Object pocCommand = pocCommandTracker.getService();
+            if (pocCommand != null) { 
+                PocInterface pocService = (PocInterface)pocCommand;
+                pocService.doIt();
+            }
+            pocCommandTracker.close();
+            System.out.println("Could not find a poc command handler able to execute command : "+command);
+	    } catch (Exception e) {
+	        System.out.println("Error while processing poc command : "+e.getMessage());
+	        e.printStackTrace();
+	    }
+    }
 }
